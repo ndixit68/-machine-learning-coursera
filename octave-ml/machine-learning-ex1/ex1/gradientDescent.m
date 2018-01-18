@@ -18,10 +18,10 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
     for iter1 = 1:length(theta)
-      temp(iter1,num_iters) = (theta(iter1,:) - alpha*(sum(((theta'*X')'-y).*(X(:,iter1)))/m));
+      temp(iter1,iter) = (theta(iter1,:) - alpha*(sum(((theta'*X')'-y).*(X(:,iter1)))/m));
     end
     
-    theta = temp(:,num_iters);
+    theta = temp(:,iter);
     %fprintf('Gradient Point %d = %f, %f\n',iter,(theta'));
     
     % ============================================================

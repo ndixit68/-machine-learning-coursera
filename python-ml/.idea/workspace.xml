@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f194dc6a-87eb-4f1a-8808-2e65c740e695" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/machine-learning-ex1/GradientDescentOneVariable.py" afterPath="$PROJECT_DIR$/machine-learning-ex1/GradientDescentOneVariable.py" />
     </list>
@@ -18,8 +17,8 @@
       <file leaf-file-name="ex1data1.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/machine-learning-ex1/ex1data1.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="14" lean-forward="false" selection-start-line="17" selection-start-column="14" selection-end-line="18" selection-end-column="13" />
+            <state relative-caret-position="493">
+              <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -28,10 +27,10 @@
       <file leaf-file-name="GradientDescentOneVariable.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/machine-learning-ex1/GradientDescentOneVariable.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="69" column="0" lean-forward="true" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+            <state relative-caret-position="296">
+              <caret line="151" column="0" lean-forward="true" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -58,10 +57,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
+    <option name="x" value="1475" />
     <option name="y" value="-8" />
     <option name="width" value="1296" />
-    <option name="height" value="978" />
+    <option name="height" value="919" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -98,7 +97,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -115,12 +114,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="pyconsole" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -176,17 +175,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="978" extended-state="6" />
-    <editor active="true" />
+    <frame x="1272" y="-8" width="1296" height="1040" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10859375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09609375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34252873" sideWeight="0.28125" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34252873" sideWeight="0.71875" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37553647" sideWeight="0.23984376" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3275862" sideWeight="0.8859375" order="10" side_tool="false" content_ui="tabs" x="265" y="576" width="646" height="285" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37553647" sideWeight="0.7601563" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -202,7 +200,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -216,10 +216,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/machine-learning-ex1/GradientDescentOneVariable.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="59" column="32" lean-forward="true" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/machine-learning-ex1/ex1data1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="14" lean-forward="false" selection-start-line="17" selection-start-column="14" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/machine-learning-ex1/GradientDescentOneVariable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1377">
+          <caret line="81" column="35" lean-forward="true" selection-start-line="81" selection-start-column="35" selection-end-line="81" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/machine-learning-ex1/ex1data1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="14" lean-forward="false" selection-start-line="17" selection-start-column="14" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/machine-learning-ex1/GradientDescentOneVariable.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="901">
           <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -237,7 +273,7 @@
         <state relative-caret-position="527">
           <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -257,14 +293,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/machine-learning-ex1/ex1data1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="14" lean-forward="false" selection-start-line="17" selection-start-column="14" selection-end-line="18" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/machine-learning-ex1/ex1data2.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -272,12 +300,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/numpy/matrixlib/defmatrix.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/machine-learning-ex1/ex1data1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/machine-learning-ex1/GradientDescentOneVariable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="69" column="0" lean-forward="true" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+        <state relative-caret-position="296">
+          <caret line="151" column="0" lean-forward="true" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
