@@ -3,6 +3,18 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 
+# Clearing all variables from python interpreter
+def clear_all():
+    """Clears all the variables from the workspace of the spyder application."""
+    gl = globals().copy()
+    for var in gl:
+        if var[0] == '_': continue
+        if 'func' in str(globals()[var]): continue
+        if 'module' in str(globals()[var]): continue
+        del globals()[var]
+
+clear_all();
+
 # loading Data from the input file
 data = np.genfromtxt('ex1data1.txt', delimiter=',')  # loading data into an array
 print 'Shape of array, or we can say dimension of matrix stored = ', data.shape
@@ -127,7 +139,6 @@ for i in range(0, theta0_vals.size):
         t = [[theta0_vals[i]], [theta1_vals[j]]]
         J_vals[i, j] = ComputeCost(X, Y, t, m);
 
-print J_vals;
 
 fig = plt.figure();
 ax = fig.add_subplot(111, projection='3d')
@@ -141,7 +152,7 @@ ax.set_zlabel('J(theta)')
 plt.show()
 
 
-raw_input("Hit enter to continue to plot J_vals as 15 contours spaced logarithmically between 0.01 and 100 ")  # this will make user to input key before the program continues
+raw_input("Hit enter to continue to plot J_vals as 15 contours spaced logarithmically between 0.01 and 100");  # this will make user to input key before the program continues
 
 # plot the contour
 
