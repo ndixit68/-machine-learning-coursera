@@ -91,10 +91,12 @@ def GradientDescent(X, Y, theta, alpha, iterations, m):
     Y = np.mat(Y);
     temp = np.mat(temp);
 
+    print theta.size
     for iter_item in range(0, iterations):
-        for theta_value in (0, theta.size - 1):
+        for theta_value in range (0, theta.shape[0]):
             temp[theta_value, iter_item] = theta[theta_value, :] - alpha * (
                     ((X[:, theta_value]).transpose()) * ((theta.transpose() * X.transpose()).transpose() - Y)) / m;
+            print theta_value
         theta = temp[:, iter_item]
         J_history[iter_item] = ComputeCost(X, Y, theta, m);
     return theta
