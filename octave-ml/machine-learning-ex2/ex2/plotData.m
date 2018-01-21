@@ -12,18 +12,15 @@ figure; hold on;
 %               examples and 'ko' for the negative examples.
 %
 
+pos = find(y==1);;
+neg = find(y==0);
 
-
-
-
-
-
-
+%plot positives 
+plot(X(pos,1),X(pos,2),'k+','MarkerSize', 10, 'LineWidth', 2);
+plot(X(neg,1),X(neg,2),'ko','MarkerFaceColor', 'y', 'MarkerSize', 10);
+title('Input Data');
 
 % =========================================================================
-
-
-
 hold off;
 
 end
