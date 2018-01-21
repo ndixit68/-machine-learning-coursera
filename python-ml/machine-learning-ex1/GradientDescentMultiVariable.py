@@ -1,3 +1,6 @@
+import cs as cs
+import matplotlib
+import matplotlib.cm as cmx
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
@@ -28,12 +31,14 @@ Y = data[:, data.shape[1] - 1]  # loading Y into an m x n matrix
 # counting the number of sample
 m = X.shape[0];
 
+
 # Defining Normalizing function
 def NormalizeFeatures(X):
     sigma = X.std(0);
     mu = X.mean(0);
     X_norm = (X - mu) / sigma;
     return X_norm, mu, sigma
+
 
 print("Normalizing Features...")
 
@@ -42,10 +47,13 @@ X, mu, sigma = NormalizeFeatures(X)
 X = np.append(np.ones(shape=(X.shape[0], 1)), X, axis=1)
 
 print('\nTesting the cost function ...\n')
+
+
 # compute and display initial cost
 def ComputeCost(X, Y, theta, m):
     J = sum((np.square((theta.transpose() * X.transpose()).transpose() - Y))) / (2 * m);
     return J
+
 
 def GradientDescent(X, Y, theta, alpha, iterations, m):
     J_history = np.zeros(shape=(iterations, 1));
@@ -53,8 +61,9 @@ def GradientDescent(X, Y, theta, alpha, iterations, m):
     temp = np.mat(temp);
 
     for iter_item in range(0, iterations):
-        for theta_value in range (0, theta.shape[0]):
-            temp[theta_value, iter_item] = theta[theta_value, :] - alpha * (((X[:, theta_value]).transpose()) * ((theta.transpose() * X.transpose()).transpose() - Y)) / m;
+        for theta_value in range(0, theta.shape[0]):
+            temp[theta_value, iter_item] = theta[theta_value, :] - alpha * (
+                ((X[:, theta_value]).transpose()) * ((theta.transpose() * X.transpose()).transpose() - Y)) / m;
         theta = temp[:, iter_item]
         J_history[iter_item] = ComputeCost(X, Y, theta, m);
     return theta, J_history
@@ -75,7 +84,7 @@ print '\n' + 'Theta found by gradient Descent: '
 print theta;
 
 fig, ax = plt.subplots()
-ax.plot(range(0, J_history.shape[0]), J_history[:,0], label="Gradient Descent")
+ax.plot(range(0, J_history.shape[0]), J_history[:, 0], label="Gradient Descent")
 plt.legend();
 leg = ax.legend();
 ax.set_xlabel('Iterations')
@@ -85,11 +94,10 @@ plt.show()
 # Do the prediction
 
 prediction = np.mat([1650, 3]);
-prediction = (prediction - mu)/sigma;
-prediction = np.append(np.ones(shape=(1,1)),prediction)
+prediction = (prediction - mu) / sigma;
+prediction = np.append(np.ones(shape=(1, 1)), prediction)
 
 predicted_price = prediction * theta
 
-print "Predicted price for a 1650 sq-ft, 3 br house is", str(predicted_price[0,0])
-
+print "Predicted price for a 1650 sq-ft, 3 br house is", str(predicted_price[0, 0])
 
