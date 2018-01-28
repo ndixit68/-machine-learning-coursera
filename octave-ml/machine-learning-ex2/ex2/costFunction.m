@@ -18,10 +18,10 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 %
 hypothesis = (theta'*X')';
-sigmoidal = (1+(e.^hypothesis)).^-1;
-J=-sum((y.*log(sigmoidal))+((1-y).*log(1-sigmoidal)))./m;
+sigmoidal = 1./(1+(e.^-hypothesis));
+J=-sum((y.*log(sigmoidal))+((1-y).*log(1-sigmoidal)))/m;
 
-grad = (sum(((sigmoidal-y).*X),1)./m);
+grad = sum(((sigmoidal-y).*X),1)/m;
 %
 % Note: grad should have the same dimensions as theta
 
