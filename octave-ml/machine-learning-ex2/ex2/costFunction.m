@@ -20,7 +20,6 @@ grad = zeros(size(theta));
 hypothesis = (theta'*X')';
 sigmoidal = 1./(1+(e.^-hypothesis));
 J=-sum((y.*log(sigmoidal))+((1-y).*log(1-sigmoidal)))/m;
-
 grad = sum(((sigmoidal-y).*X),1)/m;
 %
 % Note: grad should have the same dimensions as theta
