@@ -16,23 +16,64 @@ def clear_all():
 clear_all();
 
 # loading Data from the input file
-data=np.mat(np.genfromtxt('ex2data1.txt', delimiter=','))
+data = np.mat(np.genfromtxt('ex2data1.txt', delimiter=','))
 
-X = data[:,0:data.shape[1]-1]
-Y = data[:,data.shape[1]-1]
-
+X = data[:, 0:data.shape[1] - 1]
+Y = data[:, data.shape[1] - 1]
 
 # Plotting Data
 
-positives = np.nonzero(Y==1)[0] # indices of positive integers
-negatives = np.nonzero(Y==0)[0] # indices of negative integers
+positives = np.nonzero(Y == 1)[0]  # indices of positive integers
+negatives = np.nonzero(Y == 0)[0]  # indices of negative integers
 
-fig, ax = plt.subplots()
-ax.plot(X[positives, 0],X[positives, 1], marker='+', linestyle='')
-ax.plot(X[negatives, 0],X[negatives, 1], marker='o', linestyle='')
-plt.legend()
-leg = ax.legend(handles=[mpatches.Patch(color='green', label='Admitted'), mpatches.Patch(label='Rejected')])
-
+fig, ax = plt.subplots(sharex=True, sharey=True)
+ax.plot(X[positives, 0], X[positives, 1], marker='+', linestyle='', label='Admitted')
+ax.plot(X[negatives, 0], X[negatives, 1], marker='o', linestyle='', label='Rejected')
 ax.set_xlabel('Exam Score 1')
 ax.set_ylabel('Exam Score 2')
+plt.legend()
 plt.show()
+
+raw_input("Hit enter to continue for Logistic Regression")
+
+
+# ============ Part 2: Compute Cost and Gradient ============
+
+
+# define a function to calculate gradient and cost
+
+def CostFunction(X, Y, theta):
+    hypothesis = (theta.transpose() * X.transpose()).transpose()
+    sigmoidal = 1 / (1 + np.exp(-hypothesis))
+    J = -sum((np.multiply(Y, np.log(sigmoidal))) + (np.multiply((1 - Y), np.log(1 - sigmoidal)))) / m
+    grad = np.sum(np.multiply((sigmoidal - Y), X), axis=0) / m
+    return J, grad
+
+
+# fetching number of training sets and number of features
+(m, n) = X.shape
+
+# Adding intercept term to X
+X = np.append(np.ones(shape=(X.shape[0], 1)), X, axis=1)
+
+# define initial theta
+
+initial_theta = np.zeros(shape=(X.shape[1], 1))
+
+(cost, grad) = CostFunction(X, Y, initial_theta)
+print "Cost at initial theta (zeros):", str(cost)
+print "Expected Cost (approx) : 0.693 "
+print "Gradient at initial theta (zeros):"
+print grad
+
+test_theta = np.mat([[-24], [0.2], [0.2]])
+(cost, grad) = CostFunction(X, Y, test_theta)
+print "Cost at initial theta (zeros):", str(cost)
+print "Expected Cost (approx) : 0.218 "
+print "Gradient at initial theta (zeros): \n 0.043\n 2.566\n 2.647\n"
+print str(grad)
+
+# ============= Part 3: Optimizing using   =============
+
+
+
