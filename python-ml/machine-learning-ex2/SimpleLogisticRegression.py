@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+from scipy.optimize import fmin_bfgs # imports the BFGS algorithm to minimize
 import numpy as np
 
 
@@ -42,12 +43,18 @@ raw_input("Hit enter to continue for Logistic Regression")
 
 # define a function to calculate gradient and cost
 
-def CostFunction(X, Y, theta):
+def CostFunction(theta, X, Y):
     hypothesis = (theta.transpose() * X.transpose()).transpose()
     sigmoidal = 1 / (1 + np.exp(-hypothesis))
     J = -sum((np.multiply(Y, np.log(sigmoidal))) + (np.multiply((1 - Y), np.log(1 - sigmoidal)))) / m
+    #grad = np.sum(np.multiply((sigmoidal - Y), X), axis=0) / m
+    return J
+
+def GradientFunction(theta, X, Y ):
+    hypothesis = (theta.transpose() * X.transpose()).transpose()
+    sigmoidal = 1 / (1 + np.exp(-hypothesis))
     grad = np.sum(np.multiply((sigmoidal - Y), X), axis=0) / m
-    return J, grad
+    return grad.transpose()
 
 
 # fetching number of training sets and number of features
@@ -60,20 +67,29 @@ X = np.append(np.ones(shape=(X.shape[0], 1)), X, axis=1)
 
 initial_theta = np.zeros(shape=(X.shape[1], 1))
 
-(cost, grad) = CostFunction(X, Y, initial_theta)
+cost = CostFunction(initial_theta, X, Y)
 print "Cost at initial theta (zeros):", str(cost)
 print "Expected Cost (approx) : 0.693 "
+
+grad = GradientFunction(initial_theta, X, Y)
 print "Gradient at initial theta (zeros):"
 print grad
 
 test_theta = np.mat([[-24], [0.2], [0.2]])
-(cost, grad) = CostFunction(X, Y, test_theta)
+
+cost = CostFunction(test_theta, X, Y)
 print "Cost at initial theta (zeros):", str(cost)
 print "Expected Cost (approx) : 0.218 "
+
+grad = GradientFunction(test_theta, X, Y)
 print "Gradient at initial theta (zeros): \n 0.043\n 2.566\n 2.647\n"
 print str(grad)
 
-# ============= Part 3: Optimizing using   =============
 
+raw_input("Hit enter to continue for optimization of cost in Logistic Regression")
+# ============= Part 3: Optimizing using  BFGS =============
+
+theta_opt = fmin_bfgs(CostFunction, initial_theta, fprime=GradientFunction, args=(X, Y) )
+print theta_opt
 
 
