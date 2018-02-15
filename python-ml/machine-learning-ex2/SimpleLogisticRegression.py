@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-from scipy.optimize import fmin_bfgs # imports the BFGS algorithm to minimize
+from scipy.optimize import fmin_bfgs  # imports the BFGS algorithm to minimize
 import numpy as np
 
 
@@ -39,18 +39,18 @@ raw_input("Hit enter to continue for Logistic Regression")
 
 
 # ============ Part 2: Compute Cost and Gradient ============
-
-
 # define a function to calculate gradient and cost
+
 
 def CostFunction(theta, X, Y):
     hypothesis = (theta.transpose() * X.transpose()).transpose()
     sigmoidal = 1 / (1 + np.exp(-hypothesis))
     J = -sum((np.multiply(Y, np.log(sigmoidal))) + (np.multiply((1 - Y), np.log(1 - sigmoidal)))) / m
-    #grad = np.sum(np.multiply((sigmoidal - Y), X), axis=0) / m
+    # grad = np.sum(np.multiply((sigmoidal - Y), X), axis=0) / m
     return J
 
-def GradientFunction(theta, X, Y ):
+
+def GradientFunction(theta, X, Y):
     hypothesis = (theta.transpose() * X.transpose()).transpose()
     sigmoidal = 1 / (1 + np.exp(-hypothesis))
     grad = np.sum(np.multiply((sigmoidal - Y), X), axis=0) / m
@@ -85,11 +85,8 @@ grad = GradientFunction(test_theta, X, Y)
 print "Gradient at initial theta (zeros): \n 0.043\n 2.566\n 2.647\n"
 print str(grad)
 
-
 raw_input("Hit enter to continue for optimization of cost in Logistic Regression")
 # ============= Part 3: Optimizing using  BFGS =============
 
 theta_opt = fmin_bfgs(CostFunction, initial_theta, fprime=GradientFunction, args=(X, Y) )
 print theta_opt
-
-
