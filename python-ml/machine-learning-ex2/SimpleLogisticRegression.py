@@ -23,9 +23,10 @@ data = np.mat(np.genfromtxt('ex2data1.txt', delimiter=','))
 X = data[:, 0:data.shape[1] - 1]
 Y = data[:, data.shape[1] - 1]
 
+
 # Plotting Data
 
-def plot_data (X,Y):
+def plot_data(X, Y):
     positives = np.nonzero(Y == 1)[0]  # indices of positive integers
     negatives = np.nonzero(Y == 0)[0]  # indices of negative integers
 
@@ -35,12 +36,13 @@ def plot_data (X,Y):
     ax.set_xlabel('Exam Score 1')
     ax.set_ylabel('Exam Score 2')
     plt.legend()
-    plt.show()
+    #plt.show()
     return fig, ax
 
-fig, ax = plot_data(X,Y)
 
-raw_input("Hit enter to continue for Logistic Regression")
+#fig, ax = plot_data(X, Y)
+
+#raw_input("Hit enter to continue for Logistic Regression")
 
 
 # ============ Part 2: Compute Cost and Gradient ============
@@ -49,23 +51,32 @@ raw_input("Hit enter to continue for Logistic Regression")
 def sigmoid(X):
     return 1 / (1 + np.exp(- X))
 
+
 def CostFunction(theta, X, Y):
-    hypothesis = sigmoid(np.dot(X,theta))
-    J = -np.multiply(Y.transpose(), np.log(hypothesis)) - np.multiply((1-Y).transpose(), np.log(1 - hypothesis))
+    hypothesis = sigmoid(np.dot(X, theta))
+    J = -np.multiply(Y.transpose(), np.log(hypothesis)) - np.multiply((1 - Y).transpose(), np.log(1 - hypothesis))
     return J.mean()
 
 
 def GradientFunction(theta, X, Y):
-    hypothesis = sigmoid(np.dot(X,theta))
+    hypothesis = sigmoid(np.dot(X, theta))
     error = hypothesis - Y.transpose()
-    grad = np.dot(error, X)/Y.size
+    grad = np.dot(error, X) / Y.size
     return grad
 
-def PlotDecisonBoundary(theta, X,Y):
-    fig, ax = plot_data(X[:, 1:3],Y)
-    if X.shape[1] > 3:
-        plot_x = [min(X[:,1]), max(X[:,1])]
-        plot_y = theta[2]
+
+def PlotDecisonBoundary(theta, X, Y):
+    fig, ax = plot_data(X[:, 1:3], Y)
+
+    if X.shape[1] == 3:
+        plot_x = np.array([min(X[:, 1])[0,0], max(X[:, 1])[0,0]])
+        plot_y = (-1/theta[2])*(theta[1]*plot_x + theta[0])
+        ax.plot(plot_x, plot_y)
+
+    else:
+        
+
+    plt.show()
 
     return
 
@@ -99,7 +110,7 @@ grad = GradientFunction(test_theta, X, Y)
 print "Gradient at initial theta (zeros): \n 0.043\n 2.566\n 2.647\n"
 print str(grad)
 
-raw_input("Hit enter to continue for optimization of cost in Logistic Regression")
+#raw_input("Hit enter to continue for optimization of cost in Logistic Regression")
 
 # ============= Part 3: Optimizing using fmin_tnc =============
 
@@ -109,5 +120,4 @@ print "Cost with Optimized theta", CostFunction(theta_opt[0], X, Y)
 
 # ============== Part 4: Predict and Accuracies ==============
 
-PlotDecisonBoundary(theta_opt[0],X,Y)
-
+PlotDecisonBoundary(theta_opt[0], X, Y)
