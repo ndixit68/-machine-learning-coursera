@@ -40,9 +40,9 @@ def plot_data(X, Y):
     return fig, ax
 
 
-#fig, ax = plot_data(X, Y)
+fig, ax = plot_data(X, Y)
 
-#raw_input("Hit enter to continue for Logistic Regression")
+raw_input("Hit enter to continue for Logistic Regression")
 
 
 # ============ Part 2: Compute Cost and Gradient ============
@@ -69,14 +69,14 @@ def PlotDecisonBoundary(theta, X, Y):
     fig, ax = plot_data(X[:, 1:3], Y)
 
     if X.shape[1] == 3:
-        plot_x = np.array([min(X[:, 1])[0,0], max(X[:, 1])[0,0]])
-        plot_y = (-1/theta[2])*(theta[1]*plot_x + theta[0])
-        ax.plot(plot_x, plot_y)
+        plot_x1 = np.array([min(X[:, 1])[0,0], max(X[:, 1])[0,0]])
+        plot_x2 = (-1/theta[2])*(theta[1]*plot_x1 + theta[0])
+        ax.plot(plot_x1, plot_x2)
+        plt.show()
 
     else:
-        
 
-    plt.show()
+        plt.show()
 
     return
 
@@ -89,7 +89,6 @@ X = np.append(np.ones(shape=(X.shape[0], 1)), X, axis=1)
 
 # define initial theta
 
-initial_theta = np.zeros(shape=(X.shape[1], 1))
 initial_theta = np.zeros(X.shape[1])
 
 cost = CostFunction(initial_theta, X, Y)
@@ -103,14 +102,14 @@ print grad
 test_theta = np.array([-24, 0.2, 0.2])
 
 cost = CostFunction(test_theta, X, Y)
-print "Cost at initial theta (zeros):", str(cost)
+print "Cost at test theta (zeros):", str(cost)
 print "Expected Cost (approx) : 0.218 "
 
 grad = GradientFunction(test_theta, X, Y)
-print "Gradient at initial theta (zeros): \n 0.043\n 2.566\n 2.647\n"
+print "Gradient at test theta (zeros): \n 0.043\n 2.566\n 2.647\n"
 print str(grad)
 
-#raw_input("Hit enter to continue for optimization of cost in Logistic Regression")
+raw_input("Hit enter to continue for optimization of cost in Logistic Regression")
 
 # ============= Part 3: Optimizing using fmin_tnc =============
 
@@ -120,4 +119,4 @@ print "Cost with Optimized theta", CostFunction(theta_opt[0], X, Y)
 
 # ============== Part 4: Predict and Accuracies ==============
 
-PlotDecisonBoundary(theta_opt[0], X, Y)
+PlotDecisonBoundary(theta_opt[0], X, Y);
