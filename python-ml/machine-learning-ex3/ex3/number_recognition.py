@@ -23,7 +23,6 @@ clear_all();
 # function to display given number of example set images in given format(rows & Columns)
 
 def display_sample_images(X, sample_size, sample_shape, image_resolution, pad):
-
     #validate imputs
     if sample_shape[0]*sample_shape[1] != sample_size:
         print "Sorry, sample size does not match with the sample shape"
@@ -42,23 +41,23 @@ def display_sample_images(X, sample_size, sample_shape, image_resolution, pad):
     display_frame = - np.ones(shape=((pad + image_height)* sample_rows +pad, (pad + image_width)* sample_cols +pad))
 
     # putting each patch in the display_frame
-    #print display_frame.shape
     current_image = 0
-    for row in range(sample_rows):
-        for col in range(sample_cols):
-            if current_image > sample_rows:
-                break
-            max_val = max(abs(sel[current_image,:]))
-            display_frame[(image_height + pad)*row : (image_height+pad)*(row+1) , (image_width + pad)*col : (image_width+pad)*(1+col)] = np.reshape(sel[current_image, :], (image_height,image_width))/max_val
+    for row in range(0, sample_rows):
+        for col in range(0, sample_cols):
+            max_val = np.amax(abs(sel[current_image,:]))
+            display_frame[(image_height + pad)*row +1 : (image_height+pad)*(row+1) , (image_width + pad)*col + 1  : (image_width+pad)*(1+col)]\
+            = np.reshape(sel[current_image, :], (image_height,image_width))
             current_image = current_image + 1
-            if current_image > sample_rows:
-                break
-    return display_frame
+
+    plt.imshow(np.transpose(display_frame), origin='upper',cmap='gray')
+    plt.show()
+    return
 
 
 def check_n_load_dotmat_file():
     data = scipy.io.loadmat("ex3data1.mat")
     returndict = {}
+    count = 0
     for i in sorted(data.keys()):
         if os.path.exists(i + ".csv"):
             returndict[i.upper()] = np.mat(np.genfromtxt((i + ".csv"), delimiter=','))
@@ -67,9 +66,11 @@ def check_n_load_dotmat_file():
             np.savetxt((i.upper() + ".csv"), data[i], delimiter=',')
             print "Creating variable " + i.upper()
             returndict[i.upper()] = np.mat(np.genfromtxt((i + ".csv"), delimiter=','))
+            count = count+1
 
     variables = [item.strip().upper() for item in sorted(data.keys()) if "__" not in item]
-    print len(variables).__str__() + " elements found in the matlab file"
+    print len(variables).__str__() + " elements found in the matlab data file, " + str(count) + " loaded"
+
     return returndict
 
 if __name__ == "__main__":
@@ -78,13 +79,11 @@ if __name__ == "__main__":
 
     # check some images from the dataset loaded
     X = data['X']
-    print X.shape
-
     Y = data['Y']
-    print Y.shape
 
-    frame = display_sample_images(X, 100, [10,10], [20,20], 1)
-    plt.imshow(frame)
+    # get function to display a few images
+    display_sample_images(X, 100, [10,10], [20,20], 1)
+
 
 
 
