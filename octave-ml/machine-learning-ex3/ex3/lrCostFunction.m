@@ -37,13 +37,10 @@ grad = zeros(size(theta));
 %
 
 
-
-
-
-
-
-
-
+hypothesis = (theta'*X')';
+sigmoidal = 1./(1+(e.^-hypothesis));
+J=-sum((y.*log(sigmoidal))+((1-y).*log(1-sigmoidal)))/m + ((lambda*(sum(theta(2:size(theta,1),:).^2)))/(2*m));
+grad = (sum(((sigmoidal-y).*X),1)/m)'+([0;(lambda*theta(2:size(theta,1),:)/m)]);
 
 % =============================================================
 
