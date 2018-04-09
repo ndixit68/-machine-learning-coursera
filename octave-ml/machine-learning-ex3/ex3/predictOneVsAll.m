@@ -29,15 +29,13 @@ X = [ones(m, 1) X];
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
 %       
-
 for ex_set = 1:m
-  predicted_val = X(ex_set,:)*all_theta';
-  p(ex_set) = max(predicted_val, [], 2)
-    if prob >= 0.5;
-      p(ex_set, :) = 1;
-    else 
-      p(ex_set, :) = 0;
+  predicted_val = sigmoid(X(ex_set,:)*all_theta');
+  [max_val, index_of_max] = max(predicted_val, [], 2);
+  
+    if (max_val >= 0.5);
+      p(ex_set, :) = index_of_max;
+    endif
   end
   % =========================================================================
-
 end

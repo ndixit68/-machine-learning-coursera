@@ -63,7 +63,7 @@ def CostFunction(theta, X, Y, lmbd):
     J = np.mean(
         -np.multiply(Y.transpose(), np.log(hypothesis)) - np.multiply((1 - Y).transpose(), np.log(1 - hypothesis)))
     reg_term = lmbd * np.sum(np.square(theta)[1:theta.shape[0] + 1]) / (
-                2 * X.shape[0])  # mind that we don't have to include theta0
+                2.0 * X.shape[0])  # mind that we don't have to include theta0
     cost = J + reg_term
     return cost
 
@@ -72,7 +72,7 @@ def GradientFunction(theta, X, Y, lmbd):
     hypothesis = sigmoid(np.dot(X, theta))
     error = hypothesis - Y.transpose()
     grad = np.dot(error, X) / Y.size
-    reg_term = lmbd * theta[1:theta.shape[0] + 1] / X.shape[0]  # mind that we don't have to include theta0
+    reg_term = lmbd * theta[1:theta.shape[0] + 1] / np.float(X.shape[0])  # mind that we don't have to include theta0
     # print reg_term.shape # this should be one less than size of theta
     gradient = grad + np.append(np.array([0]), reg_term)
     # print np.append(np.array([0]),reg_term)
