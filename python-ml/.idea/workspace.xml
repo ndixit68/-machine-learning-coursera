@@ -2,16 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f194dc6a-87eb-4f1a-8808-2e65c740e695" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/../octave-ml/machine-learning-ex3/ex3/token.mat" />
-      <change beforePath="$PROJECT_DIR$/../octave-ml/machine-learning-ex3/ex3/ex3.m" afterPath="$PROJECT_DIR$/../octave-ml/machine-learning-ex3/ex3/ex3.m" />
-      <change beforePath="$PROJECT_DIR$/../octave-ml/machine-learning-ex3/ex3/oneVsAll.m" afterPath="$PROJECT_DIR$/../octave-ml/machine-learning-ex3/ex3/oneVsAll.m" />
-      <change beforePath="$PROJECT_DIR$/../octave-ml/machine-learning-ex3/ex3/predict.m" afterPath="$PROJECT_DIR$/../octave-ml/machine-learning-ex3/ex3/predict.m" />
-      <change beforePath="$PROJECT_DIR$/../octave-ml/machine-learning-ex3/ex3/predictOneVsAll.m" afterPath="$PROJECT_DIR$/../octave-ml/machine-learning-ex3/ex3/predictOneVsAll.m" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/python-ml.iml" afterPath="$PROJECT_DIR$/.idea/python-ml.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/machine-learning-ex2/LogisticRegression_with_regularization.py" afterPath="$PROJECT_DIR$/machine-learning-ex2/LogisticRegression_with_regularization.py" />
-      <change beforePath="$PROJECT_DIR$/machine-learning-ex3/Y.csv" afterPath="$PROJECT_DIR$/machine-learning-ex3/Y.csv" />
       <change beforePath="$PROJECT_DIR$/machine-learning-ex3/number_recognition.py" afterPath="$PROJECT_DIR$/machine-learning-ex3/number_recognition.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="number_recognition.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="number_recognition.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/machine-learning-ex3/number_recognition.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+            <state relative-caret-position="252">
+              <caret line="110" column="79" lean-forward="false" selection-start-line="110" selection-start-column="79" selection-end-line="110" selection-end-column="79" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -35,21 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogisticRegression_with_regularization.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LogisticRegression_with_regularization.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/machine-learning-ex2/LogisticRegression_with_regularization.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="71" column="42" lean-forward="true" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimpleLogisticRegression.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/machine-learning-ex2/SimpleLogisticRegression.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1926">
-              <caret line="111" column="12" lean-forward="false" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
+            <state relative-caret-position="239">
+              <caret line="164" column="51" lean-forward="false" selection-start-line="164" selection-start-column="51" selection-end-line="164" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -77,8 +57,8 @@
         <option value="$PROJECT_DIR$/machine-learning-ex1/GradientDescentOneVariable.py" />
         <option value="$PROJECT_DIR$/machine-learning-ex3/ex3/number_recognition.py" />
         <option value="$PROJECT_DIR$/machine-learning-ex3/LogisticRegression_with_regularization.py" />
-        <option value="$PROJECT_DIR$/machine-learning-ex3/number_recognition.py" />
         <option value="$PROJECT_DIR$/machine-learning-ex2/LogisticRegression_with_regularization.py" />
+        <option value="$PROJECT_DIR$/machine-learning-ex3/number_recognition.py" />
       </list>
     </option>
   </component>
@@ -164,7 +144,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.LogisticRegression_with_regularization">
+  <component name="RunManager" selected="Python.number_recognition">
     <configuration name="GradientDescentMultiVariable" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -273,24 +253,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="number_recognition (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/machine-learning-ex3" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python-ml" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/machine-learning-ex3/number_recognition.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration name="number_recognition" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -304,6 +266,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python-ml" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/machine-learning-ex3/ex3/number_recognition.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="number_recognition" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/machine-learning-ex3" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python-ml" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/machine-learning-ex3/number_recognition.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -372,20 +352,19 @@
       <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
-    <list size="8">
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Python.GradientDescentNormalEquation" />
       <item index="1" class="java.lang.String" itemvalue="Python.GradientDescentOneVariable" />
       <item index="2" class="java.lang.String" itemvalue="Python.GradientDescentMultiVariable" />
       <item index="3" class="java.lang.String" itemvalue="Python.SimpleLogisticRegression" />
       <item index="4" class="java.lang.String" itemvalue="Python.LogisticRegression_with_regularization" />
       <item index="5" class="java.lang.String" itemvalue="Python.number_recognition" />
-      <item index="6" class="java.lang.String" itemvalue="Python.number_recognition (1)" />
-      <item index="7" class="java.lang.String" itemvalue="Python.LogisticRegression_with_regularization (1)" />
+      <item index="6" class="java.lang.String" itemvalue="Python.LogisticRegression_with_regularization (1)" />
     </list>
     <recent_temporary>
       <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.LogisticRegression_with_regularization" />
-        <item index="1" class="java.lang.String" itemvalue="Python.number_recognition (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Python.number_recognition" />
+        <item index="1" class="java.lang.String" itemvalue="Python.LogisticRegression_with_regularization" />
         <item index="2" class="java.lang.String" itemvalue="Python.number_recognition" />
         <item index="3" class="java.lang.String" itemvalue="Python.LogisticRegression_with_regularization (1)" />
       </list>
@@ -414,7 +393,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34234235" sideWeight="0.2489019" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3251073" sideWeight="0.8703125" order="10" side_tool="false" content_ui="tabs" x="265" y="576" width="646" height="285" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3243243" sideWeight="0.8703125" order="10" side_tool="false" content_ui="tabs" x="265" y="576" width="646" height="285" />
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34234235" sideWeight="0.7510981" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -751,14 +730,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/machine-learning-ex3/ex3/number_recognition.py" />
-    <entry file="file://$PROJECT_DIR$/machine-learning-ex2/SimpleLogisticRegression.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1926">
-          <caret line="111" column="12" lean-forward="false" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
@@ -775,21 +746,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/machine-learning-ex3/number_recognition.py">
+    <entry file="file://$PROJECT_DIR$/machine-learning-ex2/SimpleLogisticRegression.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="347">
+          <caret line="111" column="12" lean-forward="false" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/machine-learning-ex2/LogisticRegression_with_regularization.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="71" column="42" lean-forward="true" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="42" />
+        <state relative-caret-position="239">
+          <caret line="164" column="51" lean-forward="false" selection-start-line="164" selection-start-column="51" selection-end-line="164" selection-end-column="51" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/machine-learning-ex3/number_recognition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="110" column="79" lean-forward="false" selection-start-line="110" selection-start-column="79" selection-end-line="110" selection-end-column="79" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
