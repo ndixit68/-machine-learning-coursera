@@ -153,6 +153,16 @@ print grad[0, 0:5]
 
 # ============= Part 2: Optimizing using fmin_tnc =============
 
+"""
+For Function opt.fmin_tnc used below, parameters required are :
+---> Function CostFunction should return cost of having the hypothesis function at a given theta, usually its a float type number
+---> x0 is intial theta, it is expected in (n, ) shape, which does not include theta0
+---> GradientFunction should return a (1,n) matrix
+---> X is (m, n) shape martix
+---> Y is (m, 1) shape matrix
+---> lmbd is lambda, its generally a float type value
+"""
+
 theta_opt = opt.fmin_tnc(func=CostFunction, x0=test_theta, fprime=GradientFunction, args=(X, Y, lmbd), messages=0)
 print "Optimized theta", theta_opt[0][1:5]
 print "Cost with Optimized theta", CostFunction(theta_opt[0], X, Y, lmbd)

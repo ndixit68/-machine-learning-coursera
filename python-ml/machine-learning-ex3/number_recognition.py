@@ -4,8 +4,10 @@ import matplotlib.patches as mpatches
 import scipy.io
 import operator
 import scipy.optimize as opt
-from scipy.optimize import fmin_bfgs  # imports the BFGS algorithm to minimize
+from scipy.optimize import fmin_bfgs, minimize # imports the BFGS algorithm to minimize
 import numpy as np
+import warnings
+warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 
 # Clearing all variables from python interpreter
@@ -57,7 +59,7 @@ def display_sample_images(X, sample_size, sample_shape, image_resolution, pad):
 
 
 def check_n_load_dotmat_file():
-    data = scipy.io.loadmat("/home/nishant/ML-Coursera/programming_exercises/python-ml/machine-learning-ex3/ex3data1.mat")
+    data = scipy.io.loadmat("ex3data1.mat")
     returndict = {}
     count = 0
     for i in sorted(data.keys()):
@@ -74,21 +76,21 @@ def check_n_load_dotmat_file():
     return returndict
 
 
-#Theta is a an array of dimension (1,), X is a mXn matrix, Y = mX1 matrix lmbd is a float value
+# Theta is a an array of dimension (1,), X is a mXn matrix, Y = mX1 matrix lmbd is a float value
 
 def CostFunction(theta, X, Y, lmbd):
     hypothesis = sigmoid(np.dot(X, theta))
-    J = np.mean(-np.multiply(Y.transpose(), np.log(hypothesis)) - np.multiply((1 - Y).transpose(), np.log(1 - hypothesis)))
-    reg_term = lmbd * np.sum(np.square(theta)[1:theta.shape[0]+1]) / (2.0 * X.shape[0])
+    J = np.mean(
+        -np.multiply(Y.transpose(), np.log(hypothesis)) - np.multiply((1 - Y).transpose(), np.log(1 - hypothesis)))
+    reg_term = lmbd * np.sum(np.square(theta)[1:theta.shape[0] + 1]) / (2.0 * X.shape[0])
     # mind that we don't have to include theta0
     cost = J + reg_term
     return cost
 
-
 def sigmoid(X):
     return 1 / (1 + np.exp(- X))
 
-#Theta is a an array of dimension (1,), X is a mXn matrix, Y = mX1 matrix lmbd is a float value
+# Theta is a an array of dimension (1,), X is a mXn matrix, Y = mX1 matrix lmbd is a float value
 
 def GradientFunction(theta, X, Y, lmbd):
     hypothesis = sigmoid(np.dot(X, theta))
@@ -97,18 +99,26 @@ def GradientFunction(theta, X, Y, lmbd):
     reg_term = lmbd * theta[1:theta.shape[0] + 1] / np.float(X.shape[0])  # mind that we don't have to include theta0
     # print reg_term.shape # this should be one less than size of theta
     gradient = grad + np.append(np.array([0]), reg_term)
-    return gradient
-
+    return gradient.transpose()
 
 def train_one_vs_all_classifier(X, Y, num_labels, lmbd):
     m = X.shape[0]
     n = X.shape[1]
-    all_theta = np.zeros(shape=(num_labels, n+1))
-    X = np.append(np.ones(shape=(m,1)),X,1)
-    initial_theta = np.zeros(n+1)
-    for classifier in range(1,num_labels+1): # we're taking range one to ten because in zero is represented as 10 in dataset
-        Y_temp = (Y==classifier).astype(int).transpose()
-        temp = opt.fmin_tnc(func=CostFunction, x0=initial_theta, fprime=GradientFunction, args=(X,Y_temp,lmbd), messages=0)
+    all_theta = np.zeros(shape=(num_labels, n + 1))
+    X = np.append(np.ones(shape=(m, 1)), X, 1)
+    initial_theta = np.zeros(n + 1)
+    """
+    For Function opt.fmin_tnc used in below for loop, parameters required are :
+    ---> Function CostFunction should return cost of having the hypothesis function at a given theta, usually its a float type number
+    ---> x0 is intial theta, it is expected in (n, ) shape, which does not include theta0
+    ---> GradientFunction should return a (1,n) matrix
+    ---> X is (m, n) shape martix
+    ---> Y is (m, 1) shape matrix
+    ---> lmbd is lambda, its generally a float type value
+    """
+    for classifier in range(1, num_labels + 1):  # we're taking range one to ten because in zero is represented as 10 in dataset
+        Y_temp = (Y == classifier).astype(int).transpose()
+        temp = opt.fmin_tnc(func=CostFunction, x0=initial_theta, fprime=GradientFunction, args=(X, Y_temp, lmbd), messages=0)
         if classifier == num_labels:
             all_theta[0, :] = temp[0]
         else:
@@ -120,22 +130,21 @@ def predict_one_vs_all(X, all_theta):
     m = X.shape[0]
     n = X.shape[1]
     X = np.append(np.ones(shape=(m, 1)), X, 1)
-    p = np.zeros(shape=(m,1))
+    p = np.zeros(shape=(m, 1))
     for ex_set in range(0, m):
-        predicted_values = sigmoid(np.dot(X[ex_set,:],all_theta.transpose()))
+        predicted_values = sigmoid(np.dot(X[ex_set, :], all_theta.transpose()))
         index_of_max = np.argmax(predicted_values)
-        max_value = predicted_values[0,index_of_max]
+        max_value = predicted_values[0, index_of_max]
         # print index_of_max, max_value
         if max_value >= 0.5:
             if index_of_max == 0:
-                p[ex_set,:] = 10 #because in zero is represented as 10
+                p[ex_set, :] = 10  # because in zero is represented as 10
             else:
-                p[ex_set,:] = index_of_max
+                p[ex_set, :] = index_of_max
     return p
 
 
 if __name__ == "__main__":
-
     # check if the variables in the matlab file are not converted to csv , if not load data in matlab file
     data = check_n_load_dotmat_file()
 
@@ -152,7 +161,7 @@ if __name__ == "__main__":
     print('\nTesting CostFunction with regularization')
 
     theta_t = np.array([-2, -1, 1, 2])
-    X_t = np.mat(np.append(np.ones(shape=(5, 1)), np.reshape(range(1, 16), (5, 3),1) / 10.0, 1))
+    X_t = np.mat(np.append(np.ones(shape=(5, 1)), np.reshape(range(1, 16), (5, 3), 1) / 10.0, 1))
     y_t = np.mat([[1], [0], [1], [0], [1]])
     lambda_t = 3
 
@@ -161,7 +170,7 @@ if __name__ == "__main__":
 
     print 'Cost: ', J
     print 'Expected cost: 2.534819\n'
-    print 'Gradients: ', grad, grad.shape
+    print 'Gradients: ', grad,
     print 'Expected gradients:\n'
     print ' 0.146561\n -0.548558\n 0.724722\n 1.398003\n'
 
@@ -170,11 +179,14 @@ if __name__ == "__main__":
     # train one vs all classifier using logistic regression
     num_labels = 10
     lmbd = 0.00001
-
+    print "Training Classifiers using Truncated-Newton Algorithm in C wrapper....\n"
     all_theta = train_one_vs_all_classifier(X, Y, num_labels, lmbd)
-    #print all_theta.shape
 
-    #predict the values usingpredictedvalue trained thetas to calculate accuracy
+    print "Classifiers Trained\n"
+    raw_input('Press enter to continue to check accuracy\n')
+
+    # predict the values using predictedvalue trained thetas to calculate accuracy
     p = predict_one_vs_all(X, all_theta)
-    print "Training set accuracy" , np.mean(np.double(p == np.transpose(Y)))*100
+    print "Training set accuracy :", np.mean(np.double(p == np.transpose(Y))) * 100
 
+    
