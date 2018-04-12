@@ -160,7 +160,6 @@ def predict_using_nn(theta1, theta2, X):
         A2 = sigmoid(np.dot(A1,theta2.transpose()))
         index_of_max = np.argmax(A2)
         max_value = A2[0, index_of_max]
-        print index_of_max, max_value
         if max_value >= 0.5:
             pred[ex_set, :] = index_of_max + 1
     return pred
@@ -176,7 +175,7 @@ if __name__ == "__main__":
 
     raw_input("Hit enter to continue and display 100 randomly picked images")
     # get function to display a few images
-    display_sample_images(X, 100, [10, 10], [20, 20], 1)
+    #display_sample_images(X, 100, [10, 10], [20, 20], 1)
 
     raw_input("Hit enter to continue and test the logistic regression")
 
@@ -230,5 +229,15 @@ if __name__ == "__main__":
     random_indices = np.random.randint(low=0, high=X.shape[0], size=X.shape[0])
 
     for i in range (0,X.shape[0]):
-        print "Displaying image at "+ str(random_indices[i])+ "row"
-        display_images(X[])
+        print "Displaying image at "+ str(random_indices[i]) + "row"
+        display_sample_images(X[i,:],1,[1,1],[20,20],1)
+        predicted_number = predict_using_nn(theta1, theta2, X[i,:])
+        print "number predicted by neural network = " + str(predicted_number%10)
+
+        action = raw_input("Press Enter to continue predicting, Press q to quit program")
+        if action == 'q':
+            break
+
+
+
+
