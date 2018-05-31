@@ -61,20 +61,24 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+X = [ones(m, 1) X];
+Z2 = (Theta1*X')';
+A2 = 1./(1+(e.^-Z2));
 
+% adding bias unit in layer 1
+A2 = [ones(m,1) A2];
+Z3 = (Theta2*A2')';
 
+%sigmoidal below represents A3 as A3 is the last layer, i.e output layer
+sigmoidal = 1./(1+(e.^-Z3));
 
+new_y = zeros(m,num_labels)
 
+for i = size(y,1)
+    new_y(i,y(i,:))= y(i,:)
+end
 
-
-
-
-
-
-
-
-
-
+J=-sum((y.*log(sigmoidal))+((1-y).*log(1-sigmoidal)))/m
 
 
 
