@@ -74,11 +74,11 @@ sigmoidal = 1./(1+(e.^-Z3));
 
 new_y = zeros(m,num_labels)
 
-for i = size(y,1)
-    new_y(i,y(i,:))= y(i,:)
+for i=1:size(y,1)
+    new_y(i,y(i,:))= y(i,:);
 end
 
-J=-sum((y.*log(sigmoidal))+((1-y).*log(1-sigmoidal)))/m
+J=-sum(sum((y.*log(sigmoidal))+((1-y).*log(1-sigmoidal))))/m;
 
 
 
