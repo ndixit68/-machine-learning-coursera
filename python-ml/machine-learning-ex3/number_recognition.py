@@ -40,10 +40,8 @@ def display_sample_images(X, sample_size, sample_shape, image_resolution, pad):
     image_width = image_resolution[1]
     sample_rows = sample_shape[0]
     sample_cols = sample_shape[1]
-
     # set up blank display frame
     display_frame = - np.ones(shape=((pad + image_height) * sample_rows + pad, (pad + image_width) * sample_cols + pad))
-
     # putting each patch in the display_frame
     current_image = 0
     for row in range(0, sample_rows):
@@ -53,7 +51,6 @@ def display_sample_images(X, sample_size, sample_shape, image_resolution, pad):
             (image_width + pad) * col + 1: (image_width + pad) * (1 + col)] \
                 = np.reshape(sel[current_image, :], (image_height, image_width))
             current_image = current_image + 1
-
     plt.imshow(np.transpose(display_frame), origin='upper', cmap='gray')
     plt.show()
     return
@@ -170,6 +167,7 @@ if __name__ == "__main__":
     data = check_n_load_dotmat_file("ex3data1.mat")
 
     # check some images from the dataset loaded
+
     X = data['X']
     Y = data['Y']
 
@@ -229,9 +227,9 @@ if __name__ == "__main__":
     random_indices = np.random.randint(low=0, high=X.shape[0], size=X.shape[0])
 
     for i in range (0,X.shape[0]):
-        print "Displaying image at "+ str(random_indices[i]) + "row"
-        display_sample_images(X[i,:],1,[1,1],[20,20],1)
-        predicted_number = predict_using_nn(theta1, theta2, X[i,:])
+        print "Displaying image at "+ str(random_indices[i]) + " row"
+        display_sample_images(X[random_indices[i],:],1,[1,1],[20,20],1)
+        predicted_number = predict_using_nn(theta1, theta2, X[random_indices[i],:])
         print "number predicted by neural network = " + str(predicted_number%10)
 
         action = raw_input("Press Enter to continue predicting, Press q to quit program")
