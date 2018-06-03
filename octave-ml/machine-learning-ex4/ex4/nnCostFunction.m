@@ -61,34 +61,72 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
-X = [ones(m, 1) X];
-Z2 = (Theta1*X')';
-A2 = 1./(1+(e.^-Z2));
+A1 = [ones(m, 1) X];
+Z2 = A1 * Theta1';
+A2 = sigmoid(Z2);
+%
 
 % adding bias unit in layer 1
 A2 = [ones(m,1) A2];
-Z3 = (Theta2*A2')';
-
+Z3 = A2*Theta2';
 %sigmoidal below represents A3 as A3 is the last layer, i.e output layer
-sigmoidal = 1./(1+(e.^-Z3));
+%_htheta = 1./(1+(e.^-Z3));
+h_theta = sigmoid(Z3);
 
-new_y = zeros(m,num_labels)
+% convert y into m X K array
+new_y = zeros(m,num_labels);
 
 for i=1:size(y,1)
-    new_y(i,y(i,:))= y(i,:);
+    new_y(i,y(i,:))= 1.0;
 end
 
-J=-sum(sum((y.*log(sigmoidal))+((1-y).*log(1-sigmoidal))))/m;
+cost = sum(new_y.*log(h_theta)+(1-new_y).*log(1-h_theta),2);
 
+theta1ExcludingBias = Theta1(:,2:end);
+theta2ExcludingBias = Theta2(:,2:end);
+reg1 = sum(sum(theta1ExcludingBias.^2));
+reg2 = sum(sum(theta2ExcludingBias.^2));
 
+regularization_term = lambda*(reg1+reg2)/(2*m);
 
-
+J=-sum(cost)/m +regularization_term;
 
 % -------------------------------------------------------------
+% -----------------------BACK PROPAGATION----------------------
+% -------------------------------------------------------------
+
+delta2 = zeros(size(Theta1));
+delta3 = zeros(size(Theta2));
+
+delta3 = h_theta - new_y;
+%delta2 = Theta2'*delta2.*sigmoidGradient(Z2);
+
+delta2 = (Theta2'*delta3')'.*(A2.*(1-A2));
 
 % =========================================================================
+capitaldelta1 = zeros(size(Theta1));
+capitaldelta2 = zeros(size(Theta2));
+for i=1:m
+ A1_ith = A1(i,:);
+ Z2_ith = A1_ith * Theta1';
+ A2_ith = sigmoid(Z2_ith);
+ %A2_ith = 1.0 ./ (1.0 + exp(-Z2_ith)); ---for console
+ % adding bias unit in layer 1
+ A2_ith = [1 Z2_ith];
+ Z3_ith = A2_ith * Theta2';
+ A3_ith = sigmoid(Z3_ith);
+ %A3_ith = 1.0 ./ (1.0 + exp(-Z3_ith)); ---for console
+ delta3_ith = A3_ith - new_y(i,:);
+ delta2_ith = Theta2' * delta3_ith .*(A2_ith.*(1-A2_ith)); %---for console
+ %delta2_ith = Theta2'*delta3_ith.*sigmoidGradient(Z2_ith);
+ capitaldelta2 = capitaldelta2 + delta3_ith * A2_ith';
+ capitaldelta1 = capitaldelta1 + delta2_ith(2:end) * A1_ith';
+ end
+ 
+ Theta1_grad = (1/m)*capitaldelta1;   
+ Theta2_grad = (1/m)*capitaldelta2;
 
-% Unroll gradients
+ % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
 
