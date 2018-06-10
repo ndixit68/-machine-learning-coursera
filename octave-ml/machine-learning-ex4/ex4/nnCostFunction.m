@@ -107,7 +107,8 @@ delta2 = (Theta2'*delta3')'.*(A2.*(1-A2));
 capitaldelta1 = zeros(size(Theta1));
 capitaldelta2 = zeros(size(Theta2));
 for i=1:m
- A1_ith = A1(i,:);
+ X_ith = X(i,:);
+ A1_ith = [1 X_ith];
  Z2_ith = A1_ith * Theta1';
  A2_ith = sigmoid(Z2_ith);
  %A2_ith = 1.0 ./ (1.0 + exp(-Z2_ith)); ---for console
@@ -117,14 +118,30 @@ for i=1:m
  A3_ith = sigmoid(Z3_ith);
  %A3_ith = 1.0 ./ (1.0 + exp(-Z3_ith)); ---for console
  delta3_ith = A3_ith - new_y(i,:);
- delta2_ith = Theta2' * delta3_ith .*(A2_ith.*(1-A2_ith)); %---for console
- %delta2_ith = Theta2'*delta3_ith.*sigmoidGradient(Z2_ith);
- capitaldelta2 = capitaldelta2 + delta3_ith * A2_ith';
- capitaldelta1 = capitaldelta1 + delta2_ith(2:end) * A1_ith';
+ %size(delta3_ith)
+ %size(Theta2'*delta3_ith')
+ %size(sigmoidGradient(A2_ith'))
+ delta2_ith = (Theta2'*delta3_ith'.*sigmoidGradient([1 Z2_ith]'))';
+ %size(delta2_ith)
+ %size(A2_ith) 
+ capitaldelta2 = capitaldelta2 + delta3_ith' * A2_ith;
+ %fprintf('capitaldelta2');
+ %size(capitaldelta2)
+ %fprintf('A1_ith')
+ %size(A1_ith)
+ capitaldelta1 = capitaldelta1 + delta2_ith(2:end)' * A1_ith;
+ %fprintf('capitaldelta1');
+ %size(capitaldelta1)
  end
  
- Theta1_grad = (1/m)*capitaldelta1;   
- Theta2_grad = (1/m)*capitaldelta2;
+%Theta1_grad = (1/m)*capitaldelta1;   
+%Theta2_grad = (1/m)*capitaldelta2;
+
+ 
+Theta1ZeroedBias = [ zeros(size(Theta1, 1), 1) theta1ExcludingBias ];
+Theta2ZeroedBias = [ zeros(size(Theta2, 1), 1) theta2ExcludingBias ];
+Theta1_grad = (1 / m) * capitaldelta1 + (lambda / m) * Theta1ZeroedBias;
+Theta2_grad = (1 / m) * capitaldelta2 + (lambda / m) * Theta2ZeroedBias;
 
  % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
