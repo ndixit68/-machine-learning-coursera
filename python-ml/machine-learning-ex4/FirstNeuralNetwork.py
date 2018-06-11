@@ -20,7 +20,6 @@ def clear_all():
         if 'module' in str(globals()[var]): continue
         del globals()[var]
 
-
 clear_all();
 
 
@@ -114,6 +113,8 @@ if __name__ == "__main__":
     # get function to display a few images
 
     display_sample_images(X, 100, [10, 10], [20, 20], 1)
+
+    nn_params =
 
     raw_input("Hit enter to continue and test the logistic regression")
 
