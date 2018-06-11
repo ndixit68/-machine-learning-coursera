@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="$(if [ "$OSTYPE" "==" "cygwin" ]; then cygpath -u 'C:\Users\nishant.kumar\Desktop\Desktop\machine-learning-coursera\python-ml\venv'; else echo '/C/Users/nishant.kumar/Desktop/Desktop/machine-learning-coursera/python-ml/venv'; fi;)"
+VIRTUAL_ENV="$(if [ "$OSTYPE" "==" "cygwin" ]; then cygpath -u 'E:\Desktop\ML-Coursera\machine-learning-coursera\python-ml\venv'; else echo '/E/Desktop/ML-Coursera/machine-learning-coursera/python-ml/venv'; fi;)"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=C:\Users\nishant.kumar\Desktop\Desktop\machine-learning-coursera\python-ml\venv"
+set "VIRTUAL_ENV=E:\Desktop\ML-Coursera\machine-learning-coursera\python-ml\venv"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
