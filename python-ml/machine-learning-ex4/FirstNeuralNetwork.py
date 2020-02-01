@@ -117,31 +117,41 @@ def sigmoidgradient(z):
 
 
 def backpropagation(Theta1, Theta2, m, X, Y, new_y, h_theta):
+
     capitaldelta1 = np.zeros(shape=(Theta1.shape))
     capitaldelta2 = np.zeros(shape=(Theta2.shape))
+
     for i in range(0, m):    # for each sample
+
         # for input Layer l=1
-        X1_ith = np.mat(X[i,:])
-        A1_ith = np.append([[1]],X1_ith,1)
+        X1_ith = np.mat(X[i, :])
+        A1_ith = np.append([[1]], X1_ith, 1)
+
         # for hidden layer l=2
         Z2_ith = np.dot(A1_ith, Theta1.transpose())
         A2_ith = sigmoid(Z2_ith)
         A2_ith = np.append([[1]], A2_ith, 1)
+
         # for output layer l=3
         Z3_ith = np.dot(A2_ith, Theta2.transpose())
         A3_ith = sigmoid(Z3_ith)
+
         # for small delta values
         delta3_ith = A3_ith - new_y[i,:]
-        delta2_ith = np.multiply((np.dot(Theta2.transpose(),delta3_ith.transpose())).transpose(),sigmoidgradient(np.append([[1]],Z2_ith,1).transpose())).transpose()
-        delta2_ith = delta2_ith[1:]  #taking off the biased row
+        delta2_ith = np.multiply((np.dot(Theta2.transpose(),delta3_ith.transpose())).transpose(), sigmoidgradient(np.append([[1]],Z2_ith,1).transpose())).transpose()
+        delta2_ith = delta2_ith[1:]  # taking off the biased row
         capitaldelta2 = np.dot(capitaldelta2 + delta3_ith.transpose(), A2_ith.transpose())
         capitaldelta1 = np.dot(capitaldelta1 + delta2_ith.transpose(), A1_ith.transpose())
+
     theta1ExcludingBias = Theta1[:, 1:]
     theta2ExcludingBias = Theta2[:, 1:]
+
     Theta1ZeroedBias = np.append(np.zeros(shape=(Theta1.shape[0], 1)), theta1ExcludingBias,1)
     Theta2ZeroedBias = np.append(np.zeros(shape=(Theta2.shape[0], 1)), theta2ExcludingBias, 1)
+
     Theta1_grad = (1 / m) * capitaldelta1 + (lmbd / m) * Theta1ZeroedBias
     Theta2_grad = (1 / m) * capitaldelta2 + (lmbd / m) * Theta2ZeroedBias
+
     # Unroll gradients
     grad = np.append(Theta1_grad.flatten('F'), Theta2_grad.flatten('F'), axis=0)
     return grad
