@@ -1,7 +1,12 @@
+import importlib
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
-from mpl_toolkits.mplot3d import Axes3D
-from matplotlib import cm
+#from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import axes3d, Axes3D  # <-- Note the capitalization!
+import matplotlib
+
+
 
 # Clearing all variables from python interpreter
 def clear_all():
@@ -12,6 +17,7 @@ def clear_all():
         if 'func' in str(globals()[var]): continue
         if 'module' in str(globals()[var]): continue
         del globals()[var]
+
 
 clear_all();
 
@@ -84,7 +90,7 @@ raw_input("Hit enter to continue for gradient Descent")  # this will make user t
 # Compute the best theta by running gradient Descent
 
 def GradientDescent(X, Y, theta, alpha, iterations, m):
-    J_history = np.zeros(shape=(iterations, 1));
+    J_history = np.zeros(shape=(iterations, 1));  # to be able to plot convergence of cost
     temp = np.zeros(shape=(theta.size, iterations));
     theta = np.mat(theta);
     X = np.mat(X);
@@ -93,10 +99,11 @@ def GradientDescent(X, Y, theta, alpha, iterations, m):
 
     print theta.size
     for iter_item in range(0, iterations):
-        for theta_value in range (0, theta.shape[0]):
+        for theta_value in range(0, theta.shape[0]):
             temp[theta_value, iter_item] = theta[theta_value, :] - alpha * (
-                    ((X[:, theta_value]).transpose()) * ((theta.transpose() * X.transpose()).transpose() - Y)) / m;
-            print theta_value
+                    ((X[:, theta_value]).transpose()) * ((theta.transpose() * X.transpose()).transpose() - Y)) / m;  # no sum function here because the multiplication will automatically sum the  values
+
+            # print theta_value
         theta = temp[:, iter_item]
         J_history[iter_item] = ComputeCost(X, Y, theta, m);
     return theta
@@ -107,15 +114,17 @@ print 'Running Gradient Descent to find best Theta'
 theta = GradientDescent(X, Y, theta, alpha, iterations, m);
 print '\n' + 'Theta found by gradient Descent: '
 print theta;
+print theta
 
 # Plot the linear fit on the data.
 
 fig, ax = plt.subplots()
 ax.plot(data[:, 0], data[:, 1], 'rx', label="Training Data")
-ax.plot(X[:, 1], X * theta, label="Linear Fit")
+ax.plot(X[:, 1], np.array(X * theta), label="Linear Fit")
 plt.legend();
 leg = ax.legend();
 plt.show()
+#plt.close()
 
 # Predict values for population sizes of 35,000 and 70,000
 
@@ -141,20 +150,20 @@ for i in range(0, theta0_vals.size):
         t = [[theta0_vals[i]], [theta1_vals[j]]]
         J_vals[i, j] = ComputeCost(X, Y, t, m);
 
-
 fig = plt.figure();
+#ax = Axes3D(fig)
 ax = fig.add_subplot(111, projection='3d')
 X_axis, Y_axis = np.meshgrid(theta0_vals, theta1_vals)
 Z_axis = J_vals.reshape(X_axis.shape)
 
-ax.plot_surface( X_axis, Y_axis, Z_axis)
+ax.plot_surface(X_axis, Y_axis, Z_axis)
 ax.set_xlabel('Theta_1')
 ax.set_ylabel('Theta_2')
 ax.set_zlabel('J(theta)')
 plt.show()
 
-
-raw_input("Hit enter to continue to plot J_vals as 15 contours spaced logarithmically between 0.01 and 100");  # this will make user to input key before the program continues
+raw_input(
+    "Hit enter to continue to plot J_vals as 15 contours spaced logarithmically between 0.01 and 100");  # this will make user to input key before the program continues
 
 # plot the contour
 
@@ -163,9 +172,7 @@ ax1 = fig1.add_subplot(111)
 X_axis, Y_axis = np.meshgrid(theta0_vals, theta1_vals)
 Z_axis = J_vals.reshape(X_axis.shape)
 
-ax1.contour(X_axis, Y_axis, Z_axis, np.logspace(-2,3,20))
+ax1.contour(X_axis, Y_axis, Z_axis, np.logspace(-2, 3, 20))
 ax1.set_xlabel('Theta_1')
 ax1.set_ylabel('Theta_2')
 plt.show()
-
-

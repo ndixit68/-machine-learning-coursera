@@ -31,8 +31,8 @@ def plot_data(X, Y):
     negatives = np.nonzero(Y == 0)[0]  # indices of negative integers
 
     fig, ax = plt.subplots(sharex=True, sharey=True)
-    ax.plot(X[positives, 0], X[positives, 1], marker='+', linestyle='', label='Admitted')
-    ax.plot(X[negatives, 0], X[negatives, 1], marker='o', linestyle='', label='Rejected')
+    ax.plot(np.array(X[positives, 0]), np.array(X[positives, 1]), marker='+', linestyle='', label='Admitted')
+    ax.plot(np.array(X[negatives, 0]), np.array(X[negatives, 1]), marker='o', linestyle='', label='Rejected')
     ax.set_xlabel('Exam Score 1')
     ax.set_ylabel('Exam Score 2')
     plt.legend()
@@ -53,7 +53,9 @@ def sigmoid(X):
 
 
 def CostFunction(theta, X, Y):
-    hypothesis = sigmoid(np.dot(X, theta))
+    hypothesis = sigmoid(np.dot(X, theta)) # See the Pdf to check hypothesis function implemented here
+
+    # See the Pdf to check cost function implemented here
     J = -np.multiply(Y.transpose(), np.log(hypothesis)) - np.multiply((1 - Y).transpose(), np.log(1 - hypothesis))
     return J.mean()
 
@@ -69,6 +71,9 @@ def PlotDecisonBoundary(theta, X, Y):
     fig, ax = plot_data(X[:, 1:3], Y)
 
     if X.shape[1] == 3:
+        # below set of values are basically just pulling out just the two points to be able to draw a decision boundary.
+        # decision boundary is just the property of hypothesis and parameters and not Dataset.
+        # that is no matter what data we have the value of hypothesis and parameters will define the decision boundary
         plot_x1 = np.array([min(X[:, 1])[0,0], max(X[:, 1])[0,0]])
         plot_x2 = (-1/theta[2])*(theta[1]*plot_x1 + theta[0])
         ax.plot(plot_x1, plot_x2)
