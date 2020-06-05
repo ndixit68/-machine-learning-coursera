@@ -100,13 +100,13 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
     for i in range(0, int(Y.shape[0])):
         new_y[i, int((Y[i,:]-1))] = 1.0
     cost = np.sum((np.multiply(new_y, np.log(h_theta)) + np.multiply((1 - new_y), np.log(1 - h_theta))),1)
-    theta1ExcludingBias = Theta1[:, 2:]
-    theta2ExcludingBias = Theta2[:, 2:]
+    theta1ExcludingBias = Theta1[:, 1:]
+    theta2ExcludingBias = Theta2[:, 1:]
     reg1 = np.sum(np.sum(np.square(theta1ExcludingBias)))
     reg2 = np.sum(np.sum(np.square(theta2ExcludingBias)))
     regularization_term = lmbd * (reg1+reg2) / (2 * m)
     J = -np.sum(cost,0) / m + regularization_term
-    grad = backpropagation(Theta1,Theta2,m,X,Y,new_y,h_theta)
+    grad = backpropagation(Theta1,Theta2,m,X,Y,new_y,h_theta, hidden_layer_size)
     return J, grad
 
 def sigmoidgradient(z):
@@ -116,7 +116,11 @@ def sigmoidgradient(z):
     return g
 
 
-def backpropagation(Theta1, Theta2, m, X, Y, new_y, h_theta):
+def backpropagation(Theta1, Theta2, m, X, Y, new_y, h_theta, hidden_layer_size):
+
+    #delta2 = np.zeros(shape=(m, hidden_layer_size))
+    #delta3 = np.zeros(shape=h_theta.shape)
+    #delta3 = h_theta - new_y
 
     capitaldelta1 = np.zeros(shape=(Theta1.shape))
     capitaldelta2 = np.zeros(shape=(Theta2.shape))
@@ -138,10 +142,10 @@ def backpropagation(Theta1, Theta2, m, X, Y, new_y, h_theta):
 
         # for small delta values
         delta3_ith = A3_ith - new_y[i,:]
-        delta2_ith = np.multiply((np.dot(Theta2.transpose(),delta3_ith.transpose())).transpose(), sigmoidgradient(np.append([[1]],Z2_ith,1).transpose())).transpose()
-        delta2_ith = delta2_ith[1:]  # taking off the biased row
-        capitaldelta2 = np.dot(capitaldelta2 + delta3_ith.transpose(), A2_ith.transpose())
-        capitaldelta1 = np.dot(capitaldelta1 + delta2_ith.transpose(), A1_ith.transpose())
+        delta2_ith = np.multiply((np.dot(delta3_ith, Theta2)), sigmoidgradient(np.append([[1]],Z2_ith,1)))
+        delta2_ith = delta2_ith[:,1:]  # taking off the biased row
+        capitaldelta2 = capitaldelta2 + np.dot(delta3_ith.transpose(), A2_ith)
+        capitaldelta1 = capitaldelta1 + np.dot(delta2_ith.transpose(), A1_ith)
 
     theta1ExcludingBias = Theta1[:, 1:]
     theta2ExcludingBias = Theta2[:, 1:]
@@ -149,11 +153,11 @@ def backpropagation(Theta1, Theta2, m, X, Y, new_y, h_theta):
     Theta1ZeroedBias = np.append(np.zeros(shape=(Theta1.shape[0], 1)), theta1ExcludingBias,1)
     Theta2ZeroedBias = np.append(np.zeros(shape=(Theta2.shape[0], 1)), theta2ExcludingBias, 1)
 
-    Theta1_grad = (1 / m) * capitaldelta1 + (lmbd / m) * Theta1ZeroedBias
-    Theta2_grad = (1 / m) * capitaldelta2 + (lmbd / m) * Theta2ZeroedBias
+    Theta1_grad = (1 / m) * (capitaldelta1 + (lmbd * Theta1ZeroedBias))
+    Theta2_grad = (1 / m) * (capitaldelta2 + (lmbd * Theta2ZeroedBias))
 
     # Unroll gradients
-    grad = np.append(Theta1_grad.flatten('F'), Theta2_grad.flatten('F'), axis=0)
+    grad = np.append(Theta1_grad.flatten('F'), Theta2_grad.flatten('F'), axis=1)
     return grad
 
 
