@@ -80,13 +80,13 @@ def nnCostFunction(nn_params, args, lmbd=0):
     input_layer_size, hidden_layer_size, num_labels, X, Y (mx1), lmbd
     '''
 
-    input_layer_size, hidden_layer_size, num_labels, X, Y = args
+    input_layer_size, hidden_layer_size, num_labels, X, new_y = args
 
     # print "\n input layer = ",  input_layer_size
     # print "\n hidden layer = ",  hidden_layer_size
     # print "\n number label = ",  num_labels
     # print "\n Shape of X = ",  X.shape
-    # print "\n Shape of Y = ",  Y.shape
+    # print "\n Shape of Y = ",  new_y shape (m X num_label)
     # print "\n lambda = ",  lmbd
 
 
@@ -115,10 +115,10 @@ def nnCostFunction(nn_params, args, lmbd=0):
     #print "Y.type = ", type(Y)
     #print "Y.property = ", property(Y)
 
-    new_y = np.zeros(shape=(m, num_labels))
+    #-new_y = np.zeros(shape=(m, num_labels))
 
-    for i in range(0, int(Y.shape[0])):
-        new_y[i, int((Y[i,:]-1))] = 1.0
+    #-for i in range(0, int(Y.shape[0])):
+    #-    new_y[i, int((Y[i,:]-1))] = 1.0
 
     # print "New_Y.shape =", new_y.shape
     # print "New_Y.type = ", type(new_y)
@@ -157,7 +157,6 @@ def backpropagation(Theta1, Theta2, m, X, new_y, lmbd=0):
     capitaldelta2 = np.zeros(shape=(Theta2.shape))
 
     for i in range(0, m):    # for each sample
-
         # for input Layer l=1
         X1_ith = np.mat(X[i, :])
         A1_ith = np.append([[1]], X1_ith, 1)
@@ -220,9 +219,11 @@ def backpropagation(Theta1, Theta2, m, X, new_y, lmbd=0):
 
     #print "Value of Theta1_grad \n \n", Theta1_grad
     #print "\n \n Value of Theta2_grad \n \n", Theta2_grad
+    #print "\n \n Size of Theta1_grad  :", Theta1_grad.shape, type(Theta1_grad), np.array(Theta1_grad).flatten('F')
+    #print "\n \n Size of Theta2_grad  :", Theta2_grad.shape, type(Theta2_grad), np.array(Theta2_grad).flatten('F')
 
     # Unroll gradients
-    grad = np.append(Theta1_grad.flatten('F'), Theta2_grad.flatten('F'), axis=1)
+    grad = np.append(np.array(Theta1_grad).flatten('F'), np.array(Theta2_grad).flatten('F'), axis=0)
     return grad
 
 
@@ -238,7 +239,7 @@ def GradientFunction(theta_unrolled, args, lmbd=0):
     input_layer_size, hidden_layer_size, num_labels, X, Y, lmbd
     '''
 
-    input_layer_size, hidden_layer_size, num_labels, X, Y = args
+    input_layer_size, hidden_layer_size, num_labels, X, new_y = args
 
     # print "\n input layer = ",  input_layer_size
     # print "\n hidden layer = ",  hidden_layer_size
@@ -248,9 +249,9 @@ def GradientFunction(theta_unrolled, args, lmbd=0):
     # print "\n lambda = ",  lmbd
 
     m = X.shape[0]
-    new_y = np.zeros(shape=(m, num_labels))
-    for i in range(0, int(Y.shape[0])):
-        new_y[i, int((Y[i,:]-1))] = 1.0
+    #-new_y = np.zeros(shape=(m, num_labels))
+    #-for i in range(0, int(Y.shape[0])):
+    #-    new_y[i, int((Y[i,:]-1))] = 1.0
 
     # roll thetas
     Theta1 = np.reshape(theta_unrolled[0:hidden_layer_size * (input_layer_size + 1)], newshape=(hidden_layer_size, (input_layer_size + 1)), order='F')
@@ -301,13 +302,23 @@ def checkNNGradients(lmbd=0):
     Theta2 = debugInitializeWeights(num_labels, hidden_layer_size)
 
     # Reusing debugInitializeWeights to generate X
-    X = debugInitializeWeights(m, input_layer_size - 1)
-    Y = np.mat(1+np.mod(range(1, m+1),num_labels)).transpose()
+    X = debugInitializeWeights(m, input_layer_size - 1) #doing -1 because its python, indices starts from 0
+    Y = np.mat(1+np.mod(range(1, m+1),num_labels))
+
+    m = X.shape[0]
+    new_y = np.zeros(shape=(m, num_labels))
+    for i in range(0, int(Y.shape[1])):
+        new_y[i, int(Y[:,i]-1)] = 1.0
 
     # UnRoll parameters
+    #print "\n \n Shape of  Theta1 in checkNNGradients: ", Theta1.shape, type(Theta1), Theta1.flatten('F')
+    #print "\n \n Shape of  Theta2 in checkNNGradients: ", Theta2.shape, type(Theta2), Theta2.flatten('F')
+
     nn_params = np.append(Theta1.flatten('F'), Theta2.flatten('F'), axis=0)
 
-    args = (input_layer_size,hidden_layer_size, num_labels, X, Y)
+    #print "\n \n Shape of nn_params in checkNNGradients: ", nn_params.shape
+
+    args = (input_layer_size,hidden_layer_size, num_labels, X, new_y)
 
     # cost = nnCostFunction(nn_params, args)
     grad = GradientFunction(nn_params, args)
@@ -320,7 +331,7 @@ def checkNNGradients(lmbd=0):
     return
 
 
-def trainNN(initial_theta, args, lmbd=0):
+def trainNN(initial_theta, args1, lmbd=0):
 
     '''Function expects the parameters & arguments in below format
     input_layer_size, hidden_layer_size, num_labels, X, Y, lmbd
@@ -343,17 +354,7 @@ def trainNN(initial_theta, args, lmbd=0):
     ---> Y is (m, 1) shape matrix
     ---> lmbd is lambda, its generally a float type value
     """
-    '''
-    for classifier in range(0, num_labels+1):  # if y range one to ten because in zero is represented as 10 in dataset
-        Y_temp = (Y == classifier).astype(int).transpose()
-        temp = opt.fmin_tnc(func=nnCostFunction, x0=initial_theta, fprime=GradientFunction, args=((args), lmbd),
-                            messages=0)
-        if classifier == num_labels:
-            all_theta[0, :] = temp[0]
-        else:
-            all_theta[classifier, :] = temp[0]
-            '''
-    all_theta = opt.fmin_tnc(func=nnCostFunction, x0=initial_theta, fprime=GradientFunction, args=((args), lmbd), messages='MGS_ALL')
+    all_theta = opt.fmin_tnc(func=nnCostFunction, x0=initial_theta, fprime=GradientFunction, args=((args1), lmbd), messages='MGS_ALL')
     return all_theta
 
 def predict_using_nn(theta1, theta2, X):
@@ -388,15 +389,11 @@ if __name__ == "__main__":
     #print "Y.shape =", Y.shape
     #print "X.shape =", X.shape
 
-    '''
     m = X.shape[0]
     new_y = np.zeros(shape=(m, num_labels))
     for i in range(0, int(Y.shape[1])):
-        if Y[:,i] == 10.0:
-            new_y[i, 0] = 1.0
-        else:
-            new_y[i, int(Y[:,i])] = 1.0
-    '''
+        new_y[i, int(Y[:,i]-1)] = 1.0
+
 
     raw_input("Hit enter to continue and display 100 randomly picked images")
     # get function to display a few images
@@ -423,7 +420,7 @@ if __name__ == "__main__":
 
     lmbd = 0
 
-    args = (input_layer_size, hidden_layer_size, num_labels, X, Y.transpose())
+    args = (input_layer_size, hidden_layer_size, num_labels, X, new_y)
 
     J = nnCostFunction(nn_params, args, lmbd)
 
@@ -477,7 +474,7 @@ if __name__ == "__main__":
     raw_input('Program paused. Press enter to continue to start training Neural Network.\n')
     print '\n Training Neural Network...\n'
 
-    lmbd = 10
+    lmbd = 0.25
     trained_params, num_of_evaluation, return_code = trainNN(initial_nn_params, args, lmbd)
 
     # unroll thetas
